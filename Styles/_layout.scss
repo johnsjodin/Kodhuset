@@ -1,0 +1,57 @@
+@use "variabler" as v;
+@use "mixins" as m;
+
+// Padding räknas in i bredden, så inget sticker ut
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Sidfoten hamnar längst ned även på korta sidor
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+.sidhuvud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$steg;
+  max-width: 960px;
+  margin: 0 auto;
+
+  @include m.mobil {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.logga {
+  color: v.$bakgrund;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+// Visar vilken sida man är på
+header nav a[aria-current="page"] {
+  color: v.$accent;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+footer {
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}

@@ -1,0 +1,37 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = null;
+    var startsida = Model.Root();
+    // Bara vanliga sidor i menyn, inte projekt och nyheter
+    var menySidor = startsida.Children().Where(sida => sida.ContentType.Alias == "sida");
+}
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@Model.Name | Kodhuset AB</title>
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+    <header>
+        <div class="sidhuvud">
+            <a class="logga" href="@startsida.Url()">Kodhuset AB</a>
+            <nav aria-label="Huvudmeny">
+                @foreach (var sida in menySidor)
+                {
+                    <a href="@sida.Url()" aria-current="@(Model.Path.Split(',').Contains(sida.Id.ToString()) ? "page" : null)">@sida.Name</a>
+                }
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year Kodhuset AB</p>
+    </footer>
+</body>
+</html>

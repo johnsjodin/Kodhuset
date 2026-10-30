@@ -1,21 +1,19 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @using Umbraco.Cms.Core.Models
 @{
-    Layout = null;
+    Layout = "master.cshtml";
     var bild = Model.Value<MediaWithCrops>("bild");
 }
-<!doctype html>
-<html lang="sv">
-<head><meta charset="utf-8"><title>@Model.Name</title><link rel="stylesheet" href="/css/site.css"></head>
-<body>
-  <h1>@Model.Name</h1>
-  <h2><em>@Model.Value("ingress")</em></h2>
 
-  @if (bild != null)
-  {
-      <img src="@bild.Url()" alt="@bild.Name" />
-  }
+<article>
+    <h1>@Model.Name</h1>
+    <p class="datum">Publicerad @Model.CreateDate.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))</p>
+    <p class="ingress">@Model.Value("ingress")</p>
 
-  @Model.Value("brodtext")
-</body>
-</html>
+    @if (bild != null)
+    {
+        <img class="huvudbild" src="@bild.GetCropUrl(width: 1200)" alt="@bild.Name" />
+    }
+
+    @Model.Value("brodtext")
+</article>

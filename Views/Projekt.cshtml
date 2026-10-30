@@ -1,14 +1,25 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage 
-@{ Layout = null; } 
-<!doctype html> 
-<html lang="sv"> 
-<head><meta charset="utf-8"><title>@Model.Name</title><link rel="stylesheet" href="/css/site.css"></head> 
-<body> 
-  <h1>@Model.Name</h1> 
-  @Model.Value("beskrivning")
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+@{
+    Layout = "master.cshtml";
+    var bild = Model.Value<MediaWithCrops>("utvaldBild");
+    var teknik = Model.Value<IEnumerable<string>>("teknik") ?? new string[0];
+}
 
-  <p><strong>Kund:</strong> @Model.Value("kund")</p> 
-  <p><strong>Teknik:</strong> @string.Join(", ", 
-  Model.Value<IEnumerable<string>>("teknik") ?? new string[0])</p>
-</body> 
-</html>
+<article>
+    <h1>@Model.Name</h1>
+
+    @if (bild != null)
+    {
+        <img class="huvudbild" src="@bild.GetCropUrl(width: 1200)" alt="" />
+    }
+
+    @Model.Value("beskrivning")
+
+    <dl class="fakta">
+        <dt>Kund</dt>
+        <dd>@Model.Value("kund")</dd>
+        <dt>Teknik</dt>
+        <dd>@string.Join(", ", teknik)</dd>
+    </dl>
+</article>

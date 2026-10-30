@@ -1,16 +1,26 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage 
-@{ Layout = null; } 
-<!doctype html> 
-<html lang="sv"> 
-<head><meta charset="utf-8"><title>@Model.Name</title><link rel="stylesheet" href="/css/site.css"></head> 
-<body> 
-<h1>@Model.Name</h1> 
-@Model.Value("brodtext") 
-<ul> 
-@foreach (var barn in Model.Children()) 
-{ 
-<li><a href="@barn.Url()">@barn.Name</a></li> 
-} 
-</ul> 
-</body> 
-</html>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{ Layout = "master.cshtml"; }
+
+<h1>@Model.Name</h1>
+
+@Model.Value("brodtext")
+
+@if (Model.Children().Any())
+{
+    <div class="kort-lista">
+        @foreach (var barn in Model.Children())
+        {
+            // Nyheter har en ingress och projekt ett utdrag
+            var sammanfattning = barn.Value<string>("ingress") ?? barn.Value<string>("utdrag");
+
+            <a class="kort" href="@barn.Url()">
+                <h2>@barn.Name</h2>
+                @if (!string.IsNullOrWhiteSpace(sammanfattning))
+                {
+                    <p>@sammanfattning</p>
+                }
+                <span class="las-mer">Läs mer</span>
+            </a>
+        }
+    </div>
+}

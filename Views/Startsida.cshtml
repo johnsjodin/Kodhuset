@@ -1,15 +1,14 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage 
-@{ Layout = null; } 
-<!doctype html> 
-<html lang="sv"> 
-<head><meta charset="utf-8"><title>@Model.Name</title><link rel="stylesheet" href="/css/site.css"></head> 
-<body> 
-  <h1>@Model.Name</h1> 
-  <ul> 
-  @foreach (var projekt in Model.Children()) 
-  { 
-    <li><a href="@projekt.Url()">@projekt.Name</a></li> 
-  } 
-  </ul> 
-</body> 
-</html>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{ Layout = "master.cshtml"; }
+
+<h1>@Model.Name</h1>
+
+<div class="kort-lista">
+    @foreach (var barn in Model.Children())
+    {
+        <a class="kort" href="@barn.Url()">
+            <h2>@barn.Name</h2>
+            <span class="las-mer">Läs mer</span>
+        </a>
+    }
+</div>

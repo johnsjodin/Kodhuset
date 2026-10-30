@@ -33,8 +33,91 @@
   a { 
     color: v.$primar; 
  
-    &:hover { 
-      color: v.$primar-hover; 
-    } 
-  } 
+    &:hover {
+      color: v.$primar-hover;
+    }
+  }
+}
+
+// Kort som är länkar, på startsidan och på listsidor
+a.kort {
+  display: block;
+  color: v.$text;
+  text-decoration: none;
+
+  &:hover {
+    border-color: v.$primar;
+  }
+
+  p {
+    margin: 8px 0;
+  }
+}
+
+.kort-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: v.$steg;
+  margin-top: 24px;
+
+  .kort {
+    margin-bottom: 0;
+  }
+}
+
+.las-mer {
+  color: v.$primar;
+  font-weight: bold;
+}
+
+// Artikelsidor: nyheter och projekt
+main {
+  a {
+    color: v.$primar;
+
+    &:hover {
+      color: v.$primar-hover;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// Stående bilder får inte ta hela skärmen
+.huvudbild {
+  display: block;
+  width: auto;
+  max-height: 480px;
+  border-radius: v.$radie;
+  margin: v.$steg 0;
+}
+
+.ingress {
+  font-size: 20px;
+}
+
+.datum {
+  color: v.$dampad;
+  font-size: 14px;
+  margin: 0;
+}
+
+.fakta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px v.$steg;
+  padding: v.$steg;
+  border-left: 4px solid v.$primar;
+  background: v.$ljus;
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin: 0;
+  }
 }
