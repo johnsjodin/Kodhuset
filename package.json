@@ -1,0 +1,28 @@
+{
+  "name": "kodhuset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": { 
+    "sass": "sass --watch Styles/main.scss:wwwroot/css/site.css", 
+        "bygg": "sass --style=compressed --no-source-map Styles/main.scss wwwroot/css/site.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnsjodin/Kodhuset.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/johnsjodin/Kodhuset/issues"
+  },
+  "homepage": "https://github.com/johnsjodin/Kodhuset#readme",
+  "devDependencies": {
+    "sass": "^1.107.0"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true
+  }
+}
