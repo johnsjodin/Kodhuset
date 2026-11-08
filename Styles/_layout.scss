@@ -55,3 +55,31 @@ footer {
     margin: 0;
   }
 }
+
+// Brödsmulor: Hem › Projekt › Sida
+.brodsmulor {
+  margin-bottom: v.$steg;
+  font-size: 14px;
+  color: v.$dampad;
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li + li::before {
+    content: "›";
+    margin: 0 8px;
+  }
+
+  a {
+    color: v.$primar;
+
+    &:hover {
+      color: v.$primar-hover;
+    }
+  }
+}

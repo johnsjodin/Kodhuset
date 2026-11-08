@@ -27,6 +27,26 @@
     </header>
 
     <main>
+        @if (Model.Id != startsida.Id)
+        {
+            <nav class="brodsmulor" aria-label="Brödsmulor">
+                <ol>
+                    @foreach (var sida in Model.AncestorsOrSelf().Reverse())
+                    {
+                        <li>
+                            @if (sida.Id == Model.Id)
+                            {
+                                <span aria-current="page">@sida.Name</span>
+                            }
+                            else
+                            {
+                                <a href="@sida.Url()">@(sida.Id == startsida.Id ? "Hem" : sida.Name)</a>
+                            }
+                        </li>
+                    }
+                </ol>
+            </nav>
+        }
         @RenderBody()
     </main>
 
