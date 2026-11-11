@@ -1,14 +1,35 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@{ Layout = "master.cshtml"; }
+@{
+    Layout = "master.cshtml";
+
+    // Taggen från länken, till exempel ?tagg=.NET
+    var tagg = Context.Request.Query["tagg"].ToString();
+    var barnen = Model.Children().ToList();
+
+    if (!string.IsNullOrWhiteSpace(tagg))
+    {
+        barnen = barnen
+            .Where(b => (b.Value<IEnumerable<string>>("teknik") ?? []).Contains(tagg, StringComparer.OrdinalIgnoreCase))
+            .ToList();
+    }
+}
 
 <h1>@Model.Name</h1>
 
 @Model.Value("brodtext")
 
-@if (Model.Children().Any())
+@if (!string.IsNullOrWhiteSpace(tagg))
+{
+    <p class="filter">
+        @barnen.Count projekt med taggen <strong>@tagg</strong>.
+        <a href="@Model.Url()">Visa alla</a>
+    </p>
+}
+
+@if (barnen.Any())
 {
     <div class="kort-lista">
-        @foreach (var barn in Model.Children())
+        @foreach (var barn in barnen)
         {
             // Nyheter har en ingress och projekt ett utdrag
             var sammanfattning = barn.Value<string>("ingress") ?? barn.Value<string>("utdrag");

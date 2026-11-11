@@ -4,10 +4,21 @@
     Layout = "master.cshtml";
     var bild = Model.Value<MediaWithCrops>("utvaldBild");
     var teknik = Model.Value<IEnumerable<string>>("teknik") ?? new string[0];
+    var listaUrl = Model.Parent()?.Url();
 }
 
 <article>
     <h1>@Model.Name</h1>
+
+    @if (teknik.Any())
+    {
+        <ul class="taggar" aria-label="Teknik">
+            @foreach (var tagg in teknik)
+            {
+                <li><a href="@($"{listaUrl}?tagg={Uri.EscapeDataString(tagg)}")">@tagg</a></li>
+            }
+        </ul>
+    }
 
     @if (bild != null)
     {
@@ -19,7 +30,5 @@
     <dl class="fakta">
         <dt>Kund</dt>
         <dd>@Model.Value("kund")</dd>
-        <dt>Teknik</dt>
-        <dd>@string.Join(", ", teknik)</dd>
     </dl>
 </article>

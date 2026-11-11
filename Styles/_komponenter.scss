@@ -121,3 +121,29 @@ main {
     margin: 0;
   }
 }
+
+// Små nyckelord som länkar till en filtrerad lista
+.taggar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 v.$steg;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid v.$ram;
+    border-radius: 999px;
+    background: v.$ljus;
+    color: v.$primar;
+    font-size: 14px;
+    text-decoration: none;
+
+    &:hover {
+      border-color: v.$primar;
+      color: v.$primar-hover;
+    }
+  }
+}
