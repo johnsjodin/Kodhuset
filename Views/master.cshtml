@@ -2,7 +2,6 @@
 @{
     Layout = null;
     var startsida = Model.Root();
-    // Bara vanliga sidor i menyn, inte projekt och nyheter
     var menySidor = startsida.Children().Where(sida => sida.ContentType.Alias == "sida");
 }
 <!doctype html>

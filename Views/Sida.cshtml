@@ -2,7 +2,6 @@
 @{
     Layout = "master.cshtml";
 
-    // Taggen från länken, till exempel ?tagg=.NET
     var tagg = Context.Request.Query["tagg"].ToString();
     var barnen = Model.Children().ToList();
 
@@ -31,7 +30,6 @@
     <div class="kort-lista">
         @foreach (var barn in barnen)
         {
-            // Nyheter har en ingress och projekt ett utdrag
             var sammanfattning = barn.Value<string>("ingress") ?? barn.Value<string>("utdrag");
 
             <a class="kort" href="@barn.Url()">
